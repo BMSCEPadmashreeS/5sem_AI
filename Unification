@@ -1,0 +1,44 @@
+
+def unify(x, y, substitution=None):
+
+    if substitution is None:
+        substitution = {}
+
+    if x == y:
+        return substitution
+
+    if isinstance(x, str) and x.islower():
+        substitution[x] = y
+        return substitution
+
+    if isinstance(y, str) and y.islower():
+        substitution[y] = x
+        return substitution
+
+    if isinstance(x, tuple) and isinstance(y, tuple):
+
+        if len(x) != len(y):
+            return None
+
+        for a, b in zip(x, y):
+            substitution = unify(a, b, substitution)
+
+            if substitution is None:
+                return None
+
+        return substitution
+
+    return None
+
+
+# Main program
+x = ("P", "x", "John")
+y = ("P", "Mary", "John")
+
+result = unify(x, y)
+
+if result is not None:
+    print("Unification Successful")
+    print("Substitution:", result)
+else:
+    print("Unification Failed")
