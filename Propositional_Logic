@@ -1,0 +1,37 @@
+
+from itertools import product
+
+# Propositions:
+# P = It is raining
+# Q = It is cloudy
+# R = Road is wet
+
+print("P\tQ\tR\t(P AND Q) -> R")
+
+# Generate truth table
+for P, Q, R in product([True, False], repeat=3):
+
+    KB = (P and Q) <= R
+
+    print(P, Q, R, KB, sep="\t")
+
+# Knowledge Base
+# Rule 1: P -> Q
+# Rule 2: Q -> R
+# Fact: P
+
+print("\nKnowledge Base:")
+
+P = True
+Q = (not P) or True
+R = (not Q) or True
+
+print("P =", P)
+print("Q =", Q)
+print("R =", R)
+
+# Query
+if P and Q and R:
+    print("Query is TRUE")
+else:
+    print("Query is FALSE")
